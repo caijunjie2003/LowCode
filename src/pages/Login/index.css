@@ -1,0 +1,65 @@
+.login_box {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  position: relative;
+}
+
+.login_center {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 300px;
+  height: 300px;
+  text-align: center;
+}
+.login_center input {
+  color:#fff
+}
+.login_center .ant-input-affix-wrapper {
+  color: #fff;
+}
+.login_btn {
+    width: 300px;
+    border: none;
+    margin-top: 10px;
+  background-image: linear-gradient(
+    to right,
+    #e4afcb 0%,
+    #b8cbb8 0%,
+    #b8cbb8 0%,
+    #e2c58b 30%,
+    #c2ce9c 64%,
+    #7edbdc 100%
+  );
+}
+#login_h1 {
+    color: #fff;
+}
+
+#login-box button {
+  margin-top: 15px;
+  width: 180px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+  border: 0;
+  border-radius: 15px;
+  /*在这里可以设置不同Login提交按钮的样式*/
+  /*background: #1abc9c;*/
+  /*background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);*/
+  background-image: linear-gradient(
+    to right,
+    #e4afcb 0%,
+    #b8cbb8 0%,
+    #b8cbb8 0%,
+    #e2c58b 30%,
+    #c2ce9c 64%,
+    #7edbdc 100%
+  );
+}
