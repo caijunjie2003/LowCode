@@ -1,33 +1,35 @@
-import { useRoutes, Navigate } from "react-router-dom";
-import Login from "../pages/Login/Login";
-import ForePage from "../pages/ForePage/ForePage";
-import Home from "../pages/Home/Home";
-import Menu from "../pages/Menu/Menu";
-import Index from "../pages/Index/Index";
-// 在react-routerv6版本 可以使用 useRoutes来创建路由规则
+import { lazy, Suspense } from "react";
+import { Navigate } from "react-router-dom";
+import AuthComponent from "../utils/AuthComponent";
+// React 组件懒加载
+// 快速导入工具函数
+const lazyLoad = (moduleName) => {
+  const Module = lazy(() => import(`../pages/${moduleName}/${moduleName}`));
+  return <Module />;
+};
+const routes = [
+  {
+    path: "/login",
+    element: lazyLoad("login"),
+  },
+  {
+    path: "/",
+    element: <AuthComponent>{lazyLoad("Home")}</AuthComponent>,
+    children: [
+      {
+        path: "",
+        element: lazyLoad("Index"),
+      },
+      {
+        path: "*",
+        element: lazyLoad("ForePage"),
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: lazyLoad("ForePage"),
+  },
+];
 
-function IndexRouter(props) {
-  // 组件上的属性 props
-  console.log(props, "触发路由规则");
-  const routers = useRoutes([
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/",
-      element: <Home exact />,
-      children: [
-        { path: "/", element: <Index /> },
-        { path: "/menu", element: <Menu /> },
-      ],
-    },
-    {
-      path: "*",
-      element: <ForePage />,
-    },
-  ]);
-  return routers;
-}
-
-export default IndexRouter;
+export default routes;

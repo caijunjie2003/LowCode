@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Input, Button, message } from "antd";
+import { Input, Button, message ,notification} from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { LoginApi } from "../../api";
+import { LoginApi, getMenuApi } from "../../api";
 import loginImg from "./imgs/login.jpeg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handelFilterRouter } from "../../utils/router";
 import "./index.css";
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {}, []);
   const [userInfo, setUserInfo] = useState({
     username: "admin",
@@ -21,12 +24,26 @@ export default function Login() {
   // 登录
   const loginFn = async () => {
     const obj = await LoginApi(userInfo);
+    let initRouter = [];
     console.log(obj, userInfo);
     if (obj.status === 200) {
-      message.success("欢迎您 亲爱的admin~");
-      return navigate("/", { replace: true });
+      // 存储token
+      localStorage.setItem("authorization", obj.data.token);
+      notification["success"]({
+        message: "系统提醒",
+        description: '欢迎回来',
+      });
+      getMenuApi().then((res) => {
+        initRouter = handelFilterRouter(res.data);
+        console.log(initRouter);
+        dispatch({
+          type: "CHANGE_ROUTER",
+          value: initRouter,
+        });
+        navigate("/", { replace: true });
+      });
+      return;
     }
-    message.error("请输入正确的账号和密码");
   };
   return (
     <div

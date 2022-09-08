@@ -1,9 +1,10 @@
 import axios from "axios";
-
+import { getTOken } from "./userAuthToken";
+import { notification } from "antd";
 const request = axios.create({
   // http://39.107.118.59:8080
   // baseURL: "http://localhost:3000/looks",
-  baseURL:'http://39.107.118.59:8080',
+  baseURL: "http://39.107.118.59:8080",
   timeout: 5000,
 });
 //3. 定义前置拦截器，请求拦截器，请求发送出去之前触发的
@@ -12,7 +13,7 @@ request.interceptors.request.use(
     //config 接口请求的配置信息
     console.log(config);
     //添加请求头
-    // config.headers["authorization"] = getTOken() || "";
+    config.headers["authorization"] = getTOken() || "";
     return config;
   },
   (error) => {
@@ -25,17 +26,26 @@ request.interceptors.response.use(
   (response) => {
     //响应回来的数据操作
     console.log(response);
-    if (response.data.status !== 200) {
-      //   ToastFn({
-      //     icon: "fail",
-      //     content: response.data.description,
-      //     Timeout: 2000,
-      //   });
+    if (
+      response.data.status === 500 &&
+      response.data.message.code === "invalid_token" &&
+      response.config.url === "/my/getInfo"
+    ) {
+      // 回到 login
+
+      window.location.replace("/login");
+    }
+    if (response.data.status === 500) {
+      notification["error"]({
+        message: "系统提醒",
+        description: response.data.message,
+      });
     }
     return response.data;
   },
   (error) => {
     //报错的是时候抛出一个报错的信息
+
     return Promise.reject(error);
   }
 );
