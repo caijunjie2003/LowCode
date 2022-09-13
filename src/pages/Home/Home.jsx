@@ -28,7 +28,7 @@ export default function Home() {
     console.log(initRouter, userInfo);
     changOpenKeys();
     initOptionsItems();
-  }, [initRouter]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [initRouter]); 
   useEffect(() => {
     reqeustFn();
   }, []);

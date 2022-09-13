@@ -12,6 +12,7 @@ function FormList(props, ref) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onFinish = (values) => {
     console.log("Success:", values);
+    props.subimtFn(values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -24,6 +25,7 @@ function FormList(props, ref) {
   // useImperativeHandle 可以让你再使用ref时自定义暴露给父组件的实例值,应当于 forwardRef一起使用
   useImperativeHandle(ref, () => ({
     showModal,
+    handleCancel,
   }));
   const handleOk = () => {
     setIsModalOpen(false);

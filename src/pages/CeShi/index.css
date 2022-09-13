@@ -1,0 +1,37 @@
+.Ceshi_box {
+  width: 500px;
+  height: 500px;
+  background-color: red;
+  position: absolute;
+}
+.Ceshi_app {
+  display: flex;
+  justify-content: space-between;
+}
+.Ceshi_center{
+  flex: 1;
+}
+.Ceshi_right{
+  width: 200px;
+}
+.Ceshi_li {
+  /* display: block; */
+  cursor: move;
+  background: #f4f6fc;
+  border: 1px solid red;
+  width: 60px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  position: absolute;
+  cursor: pointer;
+  margin: 10px;
+}
+.Ceshi_left {
+  width: 300px;
+  border: 1px solid #000;
+  height: 500px;
+}
+.ant-row {
+  cursor: pointer;
+}

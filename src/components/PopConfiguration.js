@@ -1,5 +1,5 @@
-// 弹出层配置文件
 
+// 弹出层配置文件
 export const addForm = [
     {
         title: '新增表单'
@@ -18,7 +18,7 @@ export const addForm = [
     },
     {
         config_name: "input",
-        label: '表单编码',
+        label: '表单编码',// 弹出层配置文件
         defaultKey: "fromId",
         placeholder: '',
         rules: [
@@ -34,7 +34,7 @@ export const addForm = [
         defaultKey: "fromFlag",
         rules: [
             {
-                required: true,
+                required: false,
                 message: 'Please input your E-mail!',
             },
         ]

@@ -3,10 +3,25 @@ import request from "../utils/request";
 const api = {
   login: "/api/login",
   userInfo: "/my/getInfo",
-  getMenu:'/my/menus',
+  getMenu: '/my/menus',
   addMenu: "/system/addMenu",
+  addForm: "/system/addForm",
+  getForm: "/system/getForm",
 };
-
+export function getFormApi(paramster) {
+  return request({
+    url: api.getForm,
+    method: "post",
+    data: paramster,
+  });
+}
+export function addFormApi(paramster) {
+  return request({
+    url: api.addForm,
+    method: "post",
+    data: paramster,
+  });
+}
 export function getMenuApi(paramster) {
   return request({
     url: api.getMenu,
