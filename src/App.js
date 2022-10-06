@@ -7,7 +7,6 @@ import { getMenuApi } from "./api";
 import { useRoutes, Routes, Route } from "react-router-dom";
 import { handelFilterElement, handelEnd } from "./utils/router";
 import routes from "./router";
-
 function App() {
   const Router = useSelector((state) => state.initRouter);
   const [rout, setrout] = useState(routes);
@@ -27,19 +26,8 @@ function App() {
   }, [Router]);
   return (
     <div className="App">
-      {/* <Routes>
-        <Route path="/" element={<Home></Home>}>
-          <Route index element={<Index></Index>}></Route>
-        </Route>
-        <Route path="/xiton" element={<Home></Home>}>
-          <Route path="menu" element={<Menu></Menu>}></Route>
-          <Route path="ceshi" element={<CeShi></CeShi>}></Route>
-        </Route>
-        <Route path="/login" element={<Login></Login>}></Route>
-      </Routes> */}
-
       {/* 需要使用Suspense组件包裹 懒加载的路由，指定组件未加载出，则需要使用 fallback属性，在指定页面出现前，加载对应的内容 */}
-      <Suspense fallback={null}>{elemt}</Suspense>
+        <Suspense fallback={null}>{elemt}</Suspense>
     </div>
   );
 }

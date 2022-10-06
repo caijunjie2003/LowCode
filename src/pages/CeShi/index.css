@@ -8,10 +8,10 @@
   display: flex;
   justify-content: space-between;
 }
-.Ceshi_center{
+.Ceshi_center {
   flex: 1;
 }
-.Ceshi_right{
+.Ceshi_right {
   width: 200px;
 }
 .Ceshi_li {
@@ -27,11 +27,28 @@
   cursor: pointer;
   margin: 10px;
 }
+.Ceshi_center {
+  border: 1px solid #e4e7ed;
+}
 .Ceshi_left {
   width: 300px;
-  border: 1px solid #000;
+  border: 2px solid #e4e7ed;
   height: 500px;
+}
+.Ceshi_right {
+  border: 1px solid #e4e7ed;
+  width: 400px;
 }
 .ant-row {
   cursor: pointer;
+}
+.Ceshi_center_Header {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #e4e7ed;
+  margin-bottom: 10px;
+}
+.Ceshi_center_btn {
+  margin-right: 5px;
 }

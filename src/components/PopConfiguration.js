@@ -1,9 +1,5 @@
-
 // 弹出层配置文件
 export const addForm = [
-    {
-        title: '新增表单'
-    },
     {
         config_name: "input",
         label: '表单名称',

@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
-// 快速导入工具函数
+// 快速导入工具函数 路由懒加载
 const lazyLoad = (moduleName) => {
   const Module = lazy(() => import(`../pages/${moduleName}/${moduleName}`));
   return <Module />;
@@ -42,7 +42,7 @@ export const handelFilterRouter = (routes, routerCruuten) => {
       name,
     };
     if (parant_id === 0) {
-      // 1级菜单，直接添加
+      // 1级菜单，直接添加,防止之前出现过子菜单,子菜单被覆盖
       rout[id] = {
         ...rout[id],
         ...RouterObj,

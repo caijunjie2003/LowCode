@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useImperativeHandle, forwardRef } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -14,21 +14,24 @@ import { addMenuApi, getMenuApi } from "../../api/index";
 import { handelFilterRouter } from "../../utils/router";
 import { useDispatch, useSelector } from "react-redux";
 // 封装表格组件
-export default function MenuForm(props) {
+function MenuForm(props, ref) {
   const [form] = Form.useForm();
   const [formData, setFormData] = useState({});
   const initRouter = useSelector((state) => state.initRouter);
   const dispatch = useDispatch();
   const { Option } = Select;
   const Options = initRouter.map((item) => {
-    return <Option value={item.id+''}>{item.name}</Option>;
+    return <Option value={item.id + ""}>{item.name}</Option>;
   });
+  useImperativeHandle(ref, () => ({
+    clertFormval,
+  }));
   const onFinish = async (values) => {
     console.log("Success:", values);
     const obj = await addMenuApi(values);
+    console.log(obj);
     if (obj.status === 200) {
       // 重新请求menu，调用更新方法
-      message.success(obj.message);
       props.onclose();
       getMenuApi().then((res) => {
         let initRouter = [];
@@ -46,7 +49,12 @@ export default function MenuForm(props) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const clertFormval = () => {
+    form.setFieldValue({});
+  };
+
   const onRequiredTypeChange = (changedValues, allValues) => {
+    console.log(changedValues, allValues);
     setFormData({
       ...formData,
       ...changedValues,
@@ -86,9 +94,7 @@ export default function MenuForm(props) {
         </Form.Item>
         {formData.menuType === "1" ? (
           <Form.Item label="父菜单Id" name="parantId" required>
-            <Select  onChange={handleChange}>
-              {Options}
-            </Select>
+            <Select onChange={handleChange}>{Options}</Select>
           </Form.Item>
         ) : (
           ""
@@ -141,3 +147,4 @@ export default function MenuForm(props) {
     </div>
   );
 }
+export default forwardRef(MenuForm);

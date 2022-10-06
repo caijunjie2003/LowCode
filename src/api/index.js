@@ -6,8 +6,24 @@ const api = {
   getMenu: '/my/menus',
   addMenu: "/system/addMenu",
   addForm: "/system/addForm",
+  updateForm: '/system/updateForm',
   getForm: "/system/getForm",
+  saveFormJson: '/system/saveFormJson'
 };
+export function updateFormApi(paramster) {
+  return request({
+    url: api.updateForm,
+    method: "post",
+    data: paramster,
+  });
+}
+export function saveFormJsonApi(paramster) {
+  return request({
+    url: api.saveFormJson,
+    method: "post",
+    data: paramster,
+  });
+}
 export function getFormApi(paramster) {
   return request({
     url: api.getForm,

@@ -7,13 +7,18 @@ import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store, { persistor } from "./store";
 import { PersistGate } from "redux-persist/integration/react";
+import Context from './utils/Context'
 const root = ReactDOM.createRoot(document.getElementById("root"));
+import * as echarts from 'echarts'
 root.render(
   <Provider store={store}>
     <HashRouter>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
-      </PersistGate>
+      {/* 使用Context.Provider组件 注入状态 */}
+      <Context.Provider value={{ echarts }}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Context.Provider>
     </HashRouter>
   </Provider>
 );
